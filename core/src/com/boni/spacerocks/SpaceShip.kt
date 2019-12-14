@@ -2,6 +2,7 @@ package com.boni.spacerocks
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.scenes.scene2d.Stage
 
 class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
@@ -50,5 +51,19 @@ class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
 
         applyPhysics(delta)
         wrapAroundWorld()
+    }
+
+    fun warp() {
+        if (stage == null) {
+            return
+        }
+
+        val w1 = Warp(0f, 0f, stage)
+        w1.centerAtActor(this)
+
+        setPosition(MathUtils.random(800f), MathUtils.random(600f))
+
+        val w2 = Warp(0f, 0f, stage)
+        w2.centerAtActor(this)
     }
 }

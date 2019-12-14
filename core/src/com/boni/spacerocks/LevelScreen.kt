@@ -1,5 +1,7 @@
 package com.boni.spacerocks
 
+import com.badlogic.gdx.Input
+
 class LevelScreen: BaseScreen() {
 
     private lateinit var spaceShip: SpaceShip
@@ -16,5 +18,13 @@ class LevelScreen: BaseScreen() {
 
     override fun update(dt: Float) {
 
+    }
+
+    override fun keyDown(keycode: Int): Boolean {
+        if (keycode == Input.Keys.X) {
+            spaceShip.warp()
+        }
+
+        return false
     }
 }
