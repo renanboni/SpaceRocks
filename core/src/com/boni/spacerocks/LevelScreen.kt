@@ -14,6 +14,15 @@ class LevelScreen: BaseScreen() {
         BaseActor.setWorldBounds(space)
 
         spaceShip = SpaceShip(400f, 300f, mainStage)
+
+        Rock(600f, 500f, mainStage)
+        Rock(600f, 300f, mainStage)
+        Rock(600f, 100f, mainStage)
+        Rock(400f, 100f, mainStage)
+        Rock(200f, 100f, mainStage)
+        Rock(200f, 300f, mainStage)
+        Rock(200f, 500f, mainStage)
+        Rock(400f, 500f, mainStage)
     }
 
     override fun update(dt: Float) {
