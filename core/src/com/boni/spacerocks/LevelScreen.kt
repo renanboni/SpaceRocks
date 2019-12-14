@@ -1,10 +1,13 @@
 package com.boni.spacerocks
 
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 
 class LevelScreen : BaseScreen() {
 
     private lateinit var spaceShip: SpaceShip
+
+    private var gameOver: Boolean = false
 
     override fun initialize() {
         val space = BaseActor(0f, 0f, mainStage).apply {
@@ -37,6 +40,14 @@ class LevelScreen : BaseScreen() {
 
                     spaceShip.remove()
                     spaceShip.setPosition(-1000f, -1000f)
+
+                    BaseActor(0f, 0f, mainStage).also {
+                        it.loadTexture("message-lose.png")
+                        it.centerAtPosition(400f, 300f)
+                        it.setOpacity(0f)
+                        it.addAction(Actions.fadeIn(1f))
+                        gameOver = true
+                    }
                 } else {
                     spaceShip.shieldPower -= 34
                     Explosion(0f, 0f, mainStage).also {
@@ -56,6 +67,16 @@ class LevelScreen : BaseScreen() {
                     laser.remove()
                     rock.remove()
                 }
+            }
+        }
+
+        if (!gameOver && BaseActor.count<Rock>(mainStage) == 0) {
+            BaseActor(0f, 0f, mainStage).also {
+                it.loadTexture("message-win.png")
+                it.centerAtPosition(400f, 300f)
+                it.setOpacity(0f)
+                it.addAction(Actions.fadeIn(1f))
+                gameOver = true
             }
         }
     }
