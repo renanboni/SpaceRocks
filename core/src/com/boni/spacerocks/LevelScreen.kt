@@ -2,7 +2,7 @@ package com.boni.spacerocks
 
 import com.badlogic.gdx.Input
 
-class LevelScreen: BaseScreen() {
+class LevelScreen : BaseScreen() {
 
     private lateinit var spaceShip: SpaceShip
 
@@ -26,7 +26,38 @@ class LevelScreen: BaseScreen() {
     }
 
     override fun update(dt: Float) {
+        BaseActor.getList<Rock>(mainStage).forEach {
+            val rock = it as Rock
 
+            if (rock.overlaps(spaceShip)) {
+                if (spaceShip.shieldPower <= 0) {
+                    Explosion(0f, 0f, mainStage).also {
+                        it.centerAtActor(spaceShip)
+                    }
+
+                    spaceShip.remove()
+                    spaceShip.setPosition(-1000f, -1000f)
+                } else {
+                    spaceShip.shieldPower -= 34
+                    Explosion(0f, 0f, mainStage).also {
+                        it.centerAtActor(spaceShip)
+                    }
+                    rock.remove()
+                }
+            }
+
+            BaseActor.getList<Laser>(mainStage).forEach {
+                val laser = it as Laser
+
+                if (laser.overlaps(rock)) {
+                    Explosion(0f, 0f, mainStage).also {
+                        it.centerAtActor(rock)
+                    }
+                    laser.remove()
+                    rock.remove()
+                }
+            }
+        }
     }
 
     override fun keyDown(keycode: Int): Boolean {

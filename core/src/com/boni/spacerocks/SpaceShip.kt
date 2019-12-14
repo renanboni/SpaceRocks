@@ -9,7 +9,7 @@ class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
 
     private var thrusters: Thrusters = Thrusters(0f, 0f, stage)
     private var shield: Shield = Shield(0f, 0f, stage)
-    private val shieldPower = 100f
+    var shieldPower = 100f
 
     init {
         loadTexture("spaceship.png")
