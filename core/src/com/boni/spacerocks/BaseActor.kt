@@ -7,13 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.*
 import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.Stage
 
 /**
  * This class should be used in place of ActorBeta
  * It is considered as its improved version
  */
-open class BaseActor(x: Float, y: Float, stage: Stage) : Actor() {
+open class BaseActor(x: Float, y: Float, stage: Stage) : Group() {
 
     // Animations
     private var animation: Animation<TextureRegion>? = null
@@ -46,8 +47,6 @@ open class BaseActor(x: Float, y: Float, stage: Stage) : Actor() {
     }
 
     override fun draw(batch: Batch, parentAlpha: Float) {
-        super.draw(batch, parentAlpha)
-
         color.let {
             batch.setColor(it.r, it.g, it.b, it.a)
         }
@@ -68,6 +67,8 @@ open class BaseActor(x: Float, y: Float, stage: Stage) : Actor() {
                 )
             }
         }
+
+        super.draw(batch, parentAlpha)
     }
 
     fun preventOverlap(other: BaseActor): Vector2? {
