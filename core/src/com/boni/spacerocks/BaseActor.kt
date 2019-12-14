@@ -360,6 +360,21 @@ open class BaseActor(x: Float, y: Float, stage: Stage) : Actor() {
             setWorldBounds(baseActor.width, baseActor.height)
         }
     }
+
+    fun wrapAroundWorld() {
+        if (x + width < 0) {
+            x = worldBounds.width
+        }
+        if (x > worldBounds.width) {
+            x = -width
+        }
+        if (y + height < 0) {
+            y = worldBounds.height
+        }
+        if (y > worldBounds.height) {
+            y = -height
+        }
+    }
 }
 
 

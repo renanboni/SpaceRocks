@@ -31,5 +31,6 @@ class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
         }
 
         applyPhysics(delta)
+        wrapAroundWorld()
     }
 }
