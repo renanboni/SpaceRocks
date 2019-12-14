@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
 
     private var thrusters: Thrusters = Thrusters(0f, 0f, stage)
+    private var shield: Shield = Shield(0f, 0f, stage)
+    private val shieldPower = 100f
 
     init {
         loadTexture("spaceship.png")
@@ -18,6 +20,9 @@ class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
 
         addActor(thrusters)
         thrusters.setPosition(-thrusters.width, height * .5f - thrusters.height * .5f)
+
+        addActor(shield)
+        shield.centerAtPosition(width * .5f, height * .5f)
     }
 
     override fun act(delta: Float) {
@@ -36,6 +41,11 @@ class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
             thrusters.isVisible = true
         } else {
             thrusters.isVisible = false
+        }
+
+        shield.setOpacity(shieldPower / 100)
+        if (shieldPower <= 0) {
+            shield.isVisible = false
         }
 
         applyPhysics(delta)
