@@ -25,6 +25,10 @@ class LevelScreen: BaseScreen() {
             spaceShip.warp()
         }
 
+        if (keycode == Input.Keys.SPACE) {
+            spaceShip.shoot()
+        }
+
         return false
     }
 }

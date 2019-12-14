@@ -66,4 +66,16 @@ class SpaceShip(x: Float, y: Float, stage: Stage) : BaseActor(x, y, stage) {
         val w2 = Warp(0f, 0f, stage)
         w2.centerAtActor(this)
     }
+
+    fun shoot() {
+        if (stage == null) {
+            return
+        }
+
+        Laser(0f, 0f, stage).also {
+            it.centerAtActor(this)
+            it.rotation = rotation
+            it.setMotionAngle(this.rotation)
+        }
+    }
 }
